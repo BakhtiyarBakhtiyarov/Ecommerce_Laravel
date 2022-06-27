@@ -30,6 +30,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -92,12 +93,22 @@
 <script src="{{ asset('admin/assets/node_modules/raphael/raphael-min.js')}}"></script>
 <script src="{{ asset('admin/assets/node_modules/morrisjs/morris.min.js')}}"></script>
 <script src="{{ asset('admin/assets/node_modules/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
+<script src="{{ asset('admin/assets/node_modules/jquery/jquery-3.2.1.min.js')}}"></script>
+<script src="{{ asset('admin/assets/node_modules/popper/popper.min.js')}}"></script>
 <!-- Popup message jquery -->
 <script src="{{ asset('admin/assets/node_modules/toast-master/js/jquery.toast.js')}}"></script>
 <!-- Chart JS -->
 <script src="{{ asset('admin/assets/dist/js/dashboard1.js')}}"></script>
 <script src="{{ asset('admin/assets/node_modules/toast-master/js/jquery.toast.js')}}"></script>
 <script src="{{ asset('admin/assets/node_modules/icheck/icheck.min.js')}}"></script>
+<script src="{{ asset('admin/assets/node_modules/switchery/dist/switchery.min.js')}}"></script>
+<script>
+    $(function () {
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        $('.js-switch').each(function () {
+            new Switchery($(this)[0], $(this).data());
+        });
+</script>
 </body>
 
 

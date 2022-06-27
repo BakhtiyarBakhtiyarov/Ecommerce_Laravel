@@ -87,7 +87,9 @@ Route::prefix('control')->group(function () {
     Route::get('/category', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('category.index');
     Route::get('/product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('product.index');
     Route::get('/slider', [\App\Http\Controllers\Admin\SliderController::class, 'index'])->name('slider.index');
-
+    Route::get('/product/create', [\App\Http\Controllers\Admin\ProductController::class, 'create'])->name('product.create');
+    Route::get('/category/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('category.create');
+    Route::get('/slider/create', [\App\Http\Controllers\Admin\SliderController::class, 'create'])->name('slider.create');
 });
 
 

@@ -6,7 +6,10 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Product Table </h4>
+                    <div class="row">
+                        <div class="col-md-6"><h4 class="card-title">Slider Table </h4></div>
+                        <div style="text-align: right" class="col-md-6"><a href="{{ route('slider.create') }}" class="btn waves-effect waves-light btn-success">Add slider</a></div>
+                    </div>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -20,20 +23,17 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($sliders as $slider)
+                            @foreach($sliders as $key => $slider)
                             <tr>
-                                <td>1</td>
+                                <td><?= ++$key ?></td>
                                 <td><img style="width: 50px" src="{{ $slider->image}}" /></td>
                                 <td>{{ $slider->title }}</td>
                                 <td>
-                                    <div class="input-group">
-                                    <ul class="icheck-list"><li>
-                                        <input type="checkbox" class="check" id="minimal-checkbox-2" checked>
-                                        <label for="minimal-checkbox-2">Checkbox 2</label>
-                                    </li>
-                                    </ul>
-                                   
-                                    </div></td>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                                        <label class="custom-control-label" for="customSwitch1"></label>
+                                      </div>
+                                </td>
                                 <td> <button type="button" class="btn waves-effect waves-light btn-warning">Edit</button></td>
                                 <td> <button type="button" class="btn waves-effect waves-light btn-danger">Delete</button></td>
                             </tr>
