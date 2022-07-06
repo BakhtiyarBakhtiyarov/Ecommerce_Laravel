@@ -6,10 +6,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-6"><h4 class="card-title">Category Table </h4></div>
-                        <div style="text-align: right" class="col-md-6"><a href="{{ route('category.create') }}" class="btn waves-effect waves-light btn-success">Add Category</a></div>
-                    </div>
+                    <h4 class="card-title">Category Table </h4>
+                    @if(session('success'))
+                        <div>{{ session('success') }}</div>
+                    @endif
+                    <a href="{{ route('category.create') }}" type="button" class="btn waves-effect waves-light btn-success">Add category</a>
                     <div class="table-responsive">
                         <table class="table">
                             <thead>
@@ -24,19 +25,19 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $key => $category)
+                            @foreach($categories as $category)
                             <tr>
-                                <td><?= ++$key ?></td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td><img src="{{ $category->icon}}" /></td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->slug }}</td>
                                 <td>
-                                <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                    <label class="custom-control-label" for="customSwitch1"></label>
-                                  </div>
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" name="status{{ $category->id }}" id="status{{ $category->id }}">
+                                        <label class="custom-control-label" for="status{{ $category->id }}"></label>
+                                    </div>
                                 </td>
-                                <td> <button type="button" class="btn waves-effect waves-light btn-warning">Edit</button></td>
+                                <td> <a href="{{ route('category.edit',$category->id) }}" class="btn waves-effect waves-light btn-warning">Edit</a></td>
                                 <td> <button type="button" class="btn waves-effect waves-light btn-danger">Delete</button></td>
                             </tr>
                             @endforeach

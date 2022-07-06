@@ -13,32 +13,30 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Image</th>
+                                {{-- <th>Image</th> --}}
                                 <th>Product Name</th>
                                 <th>Slug</th>
                                 <th>Price</th>
-                                <th>Description</th>
                                 <th>Status</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($products as $key => $product)
+                            @foreach($products as $product)
                             <tr>
-                                <td><?= ++$key ?></td>
-                                <td><img src="{{ $product->detail->image}}" /></td>
+                                <td>{{ $loop->iteration }}</td>
+                                {{-- <td><img src="{{ $product_details->image}}" /></td> --}}
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->slug }}</td>
                                 <td>{{ $product->price }}</td>
-                                <td>{{ $product->description }}</td>>
                                 <td>
                                     <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                        <label class="custom-control-label" for="customSwitch1"></label>
-                                      </div>
+                                        <input type="checkbox" class="custom-control-input" name="status{{ $product->id }}" id="status{{ $product->id }}">
+                                        <label class="custom-control-label" for="status{{ $product->id }}"></label>
+                                    </div>
                                 </td>
-                                <td> <button type="button" class="btn waves-effect waves-light btn-warning">Edit</button></td>
+                                    <td> <a href="{{ route('product.edit',$product->id) }}" class="btn waves-effect waves-light btn-warning">Edit</a></td>
                                 <td> <button type="button" class="btn waves-effect waves-light btn-danger">Delete</button></td>
                             </tr>
                             @endforeach

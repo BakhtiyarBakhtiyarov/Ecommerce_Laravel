@@ -12,12 +12,13 @@
                         </ul>
                     </div>
                 @endif
-                <h1>Category Create Page</h1>
-                <form enctype="multipart/form-data" method="POST" action="{{ route('category.store') }}" class="form-horizontal mt-4">
+                <h1>Category Edit Page</h1>
+                <form method="POST" action="{{ route('category.update') }}" class="form-horizontal mt-4">
                     @csrf
+                    <input type="hidden" value="{{ $category->id }}" name="id_category">
                     <div class="form-group" style="width: 50%">
                         <label>Category Name</label>
-                        <input type="text" class="form-control" name="category_name">
+                        <input value="{{ $category->name }}" type="text" class="form-control" name="category_name">
                     </div>
 
                     <div class="custom-file" style="width: 50%">
@@ -27,7 +28,7 @@
                     </div>
 
                     <div class="button-group" style="margin-left: 450px; padding-top: 20px">
-                        <button type="submit" class="btn waves-effect waves-light btn-success">Add Category</button>
+                        <button type="submit" class="btn waves-effect waves-light btn-success">Edit Category</button>
                     </div>
 
                 </form>

@@ -85,11 +85,21 @@ Route::post('/product/search', [ProductController::class, 'search'])->name('prod
 
 Route::prefix('control')->group(function () {
     Route::get('/category', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('category.index');
-    Route::get('/product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('product.index');
-    Route::get('/slider', [\App\Http\Controllers\Admin\SliderController::class, 'index'])->name('slider.index');
-    Route::get('/product/create', [\App\Http\Controllers\Admin\ProductController::class, 'create'])->name('product.create');
     Route::get('/category/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('category.create');
+    Route::post('/category/store', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('category.store');
+    Route::get('/category/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('/category/update', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category.update');
+    Route::get('/product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('product.index');
+    Route::get('/product/create', [\App\Http\Controllers\Admin\ProductController::class, 'create'])->name('product.create');
+    Route::post('/product/store', [\App\Http\Controllers\Admin\ProductController::class, 'store'])->name('product.store');
+    Route::get('/product/edit/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('product.edit');
+    Route::post('/product/update', [\App\Http\Controllers\Admin\ProductController::class, 'update'])->name('product.update');
+    Route::get('/slider', [\App\Http\Controllers\Admin\SliderController::class, 'index'])->name('slider.index');
     Route::get('/slider/create', [\App\Http\Controllers\Admin\SliderController::class, 'create'])->name('slider.create');
+    Route::post('/slider/store', [\App\Http\Controllers\Admin\SliderController::class, 'store'])->name('slider.store');
+    Route::get('/slider/edit/{id}', [\App\Http\Controllers\Admin\SliderController::class, 'edit'])->name('slider.edit');
+    Route::post('/slider/update', [\App\Http\Controllers\Admin\SliderController::class, 'update'])->name('slider.update');
+
 });
 
 
