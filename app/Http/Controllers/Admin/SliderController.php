@@ -24,11 +24,20 @@ class SliderController extends Controller
 
 public function store(SliderStoreRequest $request)
 {
-   $slider = Slider::create([
-        'title'      => $request->slider_title,
-        'slug'       => Str::slug($request->slider_title)
-    ]);
-   if ($slider)
+    if($request->hasFile('slider_image'))
+    {
+        $image = $request->file('slider_image');
+        $name = Str::random(16) . '.' . $image->getClientOriginalExtension();
+        $directory = public_path('img/slider_images');
+        $image->move($directory, $name);
+    }
+
+    $slider = new Slider();
+
+    $slider->title = $request->slider_title;
+    $slider->image = $name;
+
+   if ($slider->save())
    {
        return redirect()->route('slider.index')->with('success','Melumat ugurla elave olundu!!!');
    }
@@ -57,5 +66,18 @@ public function edit($id)
             return redirect()->route('slider.index')->with('errors','Xeta bas verdi!!!');
         }
     }
+
+    public function delete(Request $request){
+
+        $slider = Slider::where('id',$request->id)->update([
+            'is_deleted'      => 1
+        ]);
+                if($slider){
+                    return "ok";
+                }
+                else{
+                    return "no";
+                }
+            }
 
 }

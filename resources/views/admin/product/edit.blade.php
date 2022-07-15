@@ -31,11 +31,21 @@
                                 {{-- <select class="form-control custom-select" name="category_id" data-placeholder="Choose a Category" tabindex="1">
                                     <option selected disabled>Choose</option>
                                     @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
                                     @endforeach
                                 </select> --}}
                             </div>
                         </div>
+
+                        <div class="form-group" style="width: 50%">
+                            <label>Status</label>
+                            <select class="custom-select col-12" id="inlineFormCustomSelect">
+                                <option selected disabled>Choose status</option>
+                                <option value="0">Active</option>
+                                <option value="1">Deactive</option>
+                            </select>
+                        </div>
+
                     <div class="custom-file" style="width: 50%">
                         <input type="file" class="custom-file-input" id="inputGroupFile01">
                         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>

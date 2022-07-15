@@ -28,8 +28,7 @@
                             @foreach($categories as $category)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><img src="{{ $category->icon}}" /></td>
-                                <td>{{ $category->name }}</td>
+                                <td><img style="width: 80px" src="{{ asset('img/category_images') . '/' . $category->icon}}" /></td>                                <td>{{ $category->name }}</td>
                                 <td>{{ $category->slug }}</td>
                                 <td>
                                     <div class="custom-control custom-switch">
@@ -38,7 +37,7 @@
                                     </div>
                                 </td>
                                 <td> <a href="{{ route('category.edit',$category->id) }}" class="btn waves-effect waves-light btn-warning">Edit</a></td>
-                                <td> <button type="button" class="btn waves-effect waves-light btn-danger">Delete</button></td>
+                                <td> <button onclick="CategoryDelete('{{$category->id}}')" type="button" class="btn waves-effect waves-light btn-danger">Delete</button></td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -48,4 +47,43 @@
             </div>
         </div>
     </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script>
+    function CategoryDelete(id) {
+        swal({
+            title: "Warning",
+            text: "Are you sure?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            buttons: ["No", "Yes"],
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "{{ route('category.delete') }}",
+                        data: { "_token": "{{ csrf_token() }}", id:id },
+                        method: "POST",
+                        success: function (data) {
+                            if(data==="ok"){
+                                swal("Success!", "Category deleted!", "success");
+                                window.setTimeout(function(){location.reload()},2000)
+                            }else{
+                                swal("Error!", "Category didn't deleted!", "error");
+                            }
+                        },
+                        error: function (x, sts) {
+                            console.log("Error...");
+                            console.log('no');
+                        },
+                    });
+                } else {
+                    swal("Cancelled!");
+                }
+            });
+    }
+</script>
+
 @endsection

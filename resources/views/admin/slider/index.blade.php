@@ -30,7 +30,7 @@
                             @foreach($sliders as $key => $slider)
                             <tr>
                                 <td><?= ++$key ?></td>
-                                <td><img style="width: 50px" src="{{ $slider->image}}" /></td>
+                                <td><img style="width: 80px" src="{{ asset('img/slider_images') . '/' . $slider->image}}"/></td>                              <td>{{ $category->name }}</td>
                                 <td>{{ $slider->title }}</td>
                                 <td>
                                     <div class="custom-control custom-switch">
@@ -39,7 +39,7 @@
                                       </div>
                                 </td>
                                 <td> <a href="{{ route('slider.edit',$slider->id) }}" class="btn waves-effect waves-light btn-warning">Edit</a></td>
-                                <td> <button type="button" class="btn waves-effect waves-light btn-danger">Delete</button></td>
+                                <td> <button onclick="SliderDelete('{{$slider->id}}')" type="button" class="btn waves-effect waves-light btn-danger">Delete</button></td>
                             </tr>
                             @endforeach
                             </tbody>
@@ -49,4 +49,43 @@
             </div>
         </div>
     </div>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        function SliderDelete(id) {
+            swal({
+                title: "Warning",
+                text: "Are you sure?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+                buttons: ["No", "Yes"],
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: "{{ route('slider.delete') }}",
+                            data: { "_token": "{{ csrf_token() }}", id:id },
+                            method: "POST",
+                            success: function (data) {
+                                if(data==="ok"){
+                                    swal("Success!", "Slider deleted!", "success");
+                                    window.setTimeout(function(){location.reload()},2000)
+                                }else{
+                                    swal("Error!", "Slider didn't deleted!", "error");
+                                }
+                            },
+                            error: function (x, sts) {
+                                console.log("Error...");
+                                console.log('no');
+                            },
+                        });
+                    } else {
+                        swal("Cancelled!");
+                    }
+                });
+        }
+    </script>
+
 @endsection

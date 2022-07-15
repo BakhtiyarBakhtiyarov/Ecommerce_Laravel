@@ -21,6 +21,15 @@
                         <input value="{{ $category->name }}" type="text" class="form-control" name="category_name">
                     </div>
 
+                    <div class="form-group" style="width: 50%">
+                        <label>Status</label>
+                        <select class="custom-select col-12" id="inlineFormCustomSelect">
+                            <option selected disabled>Choose status</option>
+                            <option value="{{ $category->status }}">Active</option>
+                            <option value="{{ $category->status }}">Deactive</option>
+                        </select>
+                    </div>
+
                     <div class="custom-file" style="width: 50%">
                         <label class="custom-file-label" for="inputGroupFile01">Choose files</label>
                         <input type="file" class="custom-file-input" id="inputGroupFile01" name="category_icon" value="category_icon">

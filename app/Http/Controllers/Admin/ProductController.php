@@ -26,22 +26,33 @@ class ProductController extends Controller
 
     public function store(ProductStoreRequest $request)
     {
-        $product  =Product::create([
-            'name'      => $request->product_name,
-            'slug'       => Str::slug($request->product_name),
-            'description'   => $request->product_description,
-            'category_id'   => $request->category_id,
-            'price'         => $request->product_price
 
-        ]);
-        ProductDetail::create([
-            'product_id'      => $product->id,
-            'is_bestseller'   => $request->is_bestseller ?? 0,
-            'is_new'          => $request->is_new ?? 0,
-            'is_on_sale'         => $request->is_bestseller ?? 0,
-            'is_chance'          => $request->is_chance ?? 0
+        if($request->hasFile('product_detail_image'))
+        {
+            $image = $request->file('product_detail_image');
+            $name = Str::random(16) . '.' . $image->getClientOriginalExtension();
+            $directory = public_path('img/product_images');
+            $image->move($directory, $name);
+            // unlink - update zamani kohne seklin silinmesi
+        }
 
-        ]);
+        $product = new Product();
+
+            $product->name = $request->product_name;
+            $product->slug = Str::slug($request->product_name);
+            $product->description = $request->product_description;
+            $product->category_id = $request->category_id;
+            $product->price = $request->product_price;
+
+        
+        $product_detail = new ProductDetail();
+        
+            $product_detail->product_id = $product->id;
+            $product_detail->is_bestseller = $request->is_bestseller ?? 0;
+            $product_detail->is_new = $request->is_new ?? 0;
+            $product_detail->is_on_sale = $request->is_bestseller ?? 0;
+            $product_detail->is_chance = $request->is_chance ?? 0;
+
         if ($product)
         {
             return redirect()->route('product.index')->with('success','Melumat ugurla elave olundu!!!');
@@ -85,4 +96,18 @@ class ProductController extends Controller
             return redirect()->route('product.index')->with('errors','Xeta bas verdi!!!');
         }
     }
+    public function delete(Request $request){
+
+        $product = Product::where('id',$request->id)->with('detail')->update([
+            'is_deleted'      => 1
+        ]);
+
+       
+                if($product){
+                    return "ok";
+                }
+                else{
+                    return "no";
+                }
+            }
 }
