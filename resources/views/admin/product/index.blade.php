@@ -7,6 +7,9 @@
                     <div class="row">
                         <div class="col-md-6"><h4 class="card-title">Product Table </h4></div>
                         <div style="text-align: right" class="col-md-6"><a href="{{ route('product.create') }}" class="btn waves-effect waves-light btn-success">Add product</a></div>
+                        @if(session('success'))
+                        <div>{{ session('success') }}</div>
+                    @endif
                     </div>
                     <div class="table-responsive">
                         <table class="table">
@@ -26,7 +29,7 @@
                             @foreach($products as $product)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                {{-- <td><img style="width: 80px" src="{{ asset('img/product_images') . '/' . $product->detail->image}}" /></td>                                <td>{{ $category->name }}</td> --}}
+                                {{-- <td><img style="width: 80px" src="{{ asset('img/product_images') . '/' . $product->detail->image}}" /></td>                                 --}}
                                 <td>{{ $product->name }}</td>
                                 <td>{{ $product->slug }}</td>
                                 <td>{{ $product->price }}</td>
@@ -47,6 +50,7 @@
             </div>
         </div>
     </div>
+    {{ $products->links() }}
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

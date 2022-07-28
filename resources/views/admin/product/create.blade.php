@@ -40,8 +40,8 @@
                             <label>Status</label>
                             <select class="custom-select col-12" id="inlineFormCustomSelect">
                                 <option selected disabled>Choose status</option>
-                                <option value="0">Active</option>
-                                <option value="1">Deactive</option>
+                                <option value="1">Active</option>
+                                <option value="0">Deactive</option>
                             </select>
                         </div>
 

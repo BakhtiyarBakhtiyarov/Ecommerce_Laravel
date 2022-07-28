@@ -9,12 +9,13 @@ use App\Models\Product;
 use App\Models\ProductDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('detail')->where('is_deleted', 0)->get();
+        $products = Product::with('detail')->where('is_deleted', 0)->paginate(3);
         return view('admin.product.index',compact('products'));
     }
 
@@ -33,7 +34,6 @@ class ProductController extends Controller
             $name = Str::random(16) . '.' . $image->getClientOriginalExtension();
             $directory = public_path('img/product_images');
             $image->move($directory, $name);
-            // unlink - update zamani kohne seklin silinmesi
         }
 
         $product = new Product();
@@ -46,14 +46,15 @@ class ProductController extends Controller
 
         
         $product_detail = new ProductDetail();
-        
+
             $product_detail->product_id = $product->id;
             $product_detail->is_bestseller = $request->is_bestseller ?? 0;
             $product_detail->is_new = $request->is_new ?? 0;
             $product_detail->is_on_sale = $request->is_bestseller ?? 0;
             $product_detail->is_chance = $request->is_chance ?? 0;
 
-        if ($product)
+            
+        if ($product && $product_detail)
         {
             return redirect()->route('product.index')->with('success','Melumat ugurla elave olundu!!!');
         }
@@ -98,7 +99,7 @@ class ProductController extends Controller
     }
     public function delete(Request $request){
 
-        $product = Product::where('id',$request->id)->with('detail')->update([
+        $product = Product::where('id',$request->id)->update([
             'is_deleted'      => 1
         ]);
 

@@ -71,7 +71,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[HomePageController::class,'index'])->name('home');
 Route::get('/category/{id}',[CategoryController::class,'index'])->name('category.show');
 Route::get('/product/{slug_product}', [ProductController::class, 'index'])->name('product.show');
-Route::post('/product/search', [ProductController::class, 'search'])->name('product.search');
+Route::get('/search', [ProductController::class, 'search'])->name('product.search');
 
  Route::get('/control',function (){
      return view('admin.homepage');

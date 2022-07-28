@@ -35,7 +35,7 @@ class CategoryController extends Controller
         $category->name = $request->category_name;
         $category->slug = Str::slug($request->category_name);
         $category->icon = $name;
-        
+
        if ($category->save())
        {
            return redirect()->route('category.index')->with('success','Melumat ugurla elave olundu!!!');
@@ -53,10 +53,15 @@ class CategoryController extends Controller
 
     public function update(CategoryStoreRequest $request)
     {
-        $category = Category::where('id',$request->id_category)->update([
-            'name'      => $request->category_name,
-            'slug'       => Str::slug($request->category_name)
-        ]);
+        $category = Category::where('id',$request->id_category)->first();
+
+        @unlink(public_path('admin/img/category_images/'. $category->icon));
+
+        // $category = Category::where('id',$request->id_category)->update([
+        //     'name'      => $request->category_name,
+        //     'slug'       => Str::slug($request->category_name)
+        // ]);
+        
         if ($category)
         {
             return redirect()->route('category.index')->with('success','Melumat ugurla redakte olundu!!!');

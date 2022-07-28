@@ -20,8 +20,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Image</th>
-                                <th>Slider Title</th>
-                                <th>Status</th>                               
+                                <th>Slider Title</th>                               
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -30,14 +29,8 @@
                             @foreach($sliders as $key => $slider)
                             <tr>
                                 <td><?= ++$key ?></td>
-                                <td><img style="width: 80px" src="{{ asset('img/slider_images') . '/' . $slider->image}}"/></td>                              <td>{{ $category->name }}</td>
+                                <td><img style="width: 80px" src="{{ asset('img/slider_images') . '/' . $slider->image}}"/></td>                             
                                 <td>{{ $slider->title }}</td>
-                                <td>
-                                    <div class="custom-control custom-switch">
-                                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                                        <label class="custom-control-label" for="customSwitch1"></label>
-                                      </div>
-                                </td>
                                 <td> <a href="{{ route('slider.edit',$slider->id) }}" class="btn waves-effect waves-light btn-warning">Edit</a></td>
                                 <td> <button onclick="SliderDelete('{{$slider->id}}')" type="button" class="btn waves-effect waves-light btn-danger">Delete</button></td>
                             </tr>

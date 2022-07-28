@@ -8,16 +8,15 @@
                     <div class="panel-heading">Categories</div>
                     <div class="list-group categories">
                         @foreach($categories as $category)
-                            <a target="_blank" href="{{ route('category.show',$category->id) }}" class="list-group-item"><img src="{{ $category->icon }}"/> {{ $category->name }} </a>
-                        @endforeach
+                        <a target="_blank" href="{{ route('category.show',$category->id) }}" class="list-group-item"><img style="width: 50px" src="{{ asset('img/category_images').'/'.$category->icon }}"/> {{ $category->name }} </a>                        @endforeach
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner" role="listbox">
-                        @foreach($sliders as $slider)
-                        <div class="item @if($sliders[0] == $slider) active  @endif">
+                        @foreach($sliders as $key => $slider)
+                        <div class="item @if($key == 0) active  @endif">
                             <img src="{{ $slider->image }}" alt="{{ $slider->title }}">
                             <div class="carousel-caption">
                                 {{ $slider->title }}

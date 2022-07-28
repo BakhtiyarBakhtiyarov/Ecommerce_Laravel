@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = 'product';
+    protected $guarded = ['id'];
+    public $timestamps = false;
 
     public function detail(){
         return $this->hasOne(ProductDetail::class, 'product_id', 'id');

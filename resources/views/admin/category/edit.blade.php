@@ -25,14 +25,16 @@
                         <label>Status</label>
                         <select class="custom-select col-12" id="inlineFormCustomSelect">
                             <option selected disabled>Choose status</option>
-                            <option value="{{ $category->status }}">Active</option>
-                            <option value="{{ $category->status }}">Deactive</option>
+                            <option value=" {{$category->status }}" @if ($category->status == 1) selected @endif >Active</option>
+                            <option value=" {{$category->status }}" @if ($category->status == 0) selected @endif>Deactive</option>
                         </select>
                     </div>
 
                     <div class="custom-file" style="width: 50%">
                         <label class="custom-file-label" for="inputGroupFile01">Choose files</label>
                         <input type="file" class="custom-file-input" id="inputGroupFile01" name="category_icon" value="category_icon">
+                        <p>Image now:</p>
+                        <img style="width: 80px" src="{{ asset('img/category_images') . '/' . $category->icon}}" alt="">
 
                     </div>
 

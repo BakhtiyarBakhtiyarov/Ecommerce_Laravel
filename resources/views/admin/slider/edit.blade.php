@@ -25,8 +25,9 @@
                         <label>Status</label>
                         <select class="custom-select col-12" id="inlineFormCustomSelect">
                             <option selected disabled>Choose status</option>
-                            <option value="0">Active</option>
-                            <option value="1">Deactive</option>
+                            <option value=" {{$slider->status }}" @if ($slider->status == 1) selected @endif >Active</option>
+                            <option value=" {{$slider->status }}" @if ($slider->status == 0) selected @endif>Deactive</option>
+                       
                         </select>
                     </div>
 
@@ -34,7 +35,11 @@
                         <label class="custom-file-label" for="inputGroupFile01">Choose files</label>
                         <input type="file" class="custom-file-input" id="inputGroupFile01" name="slider_image">
 
+                        <p>Image now:</p>
+                        <img style="width: 80px" src="{{ asset('img/slider_images') . '/' . $slider->image}}" alt="">
                     </div>
+
+
 
                     <div class="button-group" style="margin-left: 450px; padding-top: 20px">
                         <button type="submit" class="btn waves-effect waves-light btn-success">Edit Slider</button>
