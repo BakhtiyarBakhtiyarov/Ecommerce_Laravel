@@ -16,8 +16,18 @@
 </head>
 
 <body class="skin-default-dark fixed-layout">
-<form class="form pt-3" style="margin: 15%"  >
-    <div class="form-group" >
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<form method="POST" action="{{ route('login.post') }}" class="form pt-3">
+    @csrf
+    <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -26,7 +36,7 @@
             <input type="email" name="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon22">
         </div>
     </div>
-    <div class="form-group" >
+    <div class="form-group">
         <label>Password</label>
         <div class="input-group mb-3">
             <div class="input-group-prepend">

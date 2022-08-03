@@ -83,27 +83,31 @@ Route::get('/search', [ProductController::class, 'search'])->name('product.searc
 //    return view('admin.category');
 //});
 
-Route::prefix('control')->group(function () {
-    Route::get('/login', [\App\Http\Controllers\Admin\LoginController::class, 'index'])->name('login.index');
-    Route::get('/category', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('category.index');
-    Route::get('/category/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('category.create');
-    Route::post('/category/store', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('category.store');
-    Route::get('/category/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category.edit');
-    Route::post('/category/update', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category.update');
-    Route::post('/category/delete', [\App\Http\Controllers\Admin\CategoryController::class, 'delete'])->name('category.delete');
-    Route::get('/product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('product.index');
-    Route::get('/product/create', [\App\Http\Controllers\Admin\ProductController::class, 'create'])->name('product.create');
-    Route::post('/product/store', [\App\Http\Controllers\Admin\ProductController::class, 'store'])->name('product.store');
-    Route::get('/product/edit/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('product.edit');
-    Route::post('/product/update', [\App\Http\Controllers\Admin\ProductController::class, 'update'])->name('product.update');
-    Route::post('/product/delete', [\App\Http\Controllers\Admin\ProductController::class, 'delete'])->name('product.delete');
-    Route::get('/slider', [\App\Http\Controllers\Admin\SliderController::class, 'index'])->name('slider.index');
-    Route::get('/slider/create', [\App\Http\Controllers\Admin\SliderController::class, 'create'])->name('slider.create');
-    Route::post('/slider/store', [\App\Http\Controllers\Admin\SliderController::class, 'store'])->name('slider.store');
-    Route::get('/slider/edit/{id}', [\App\Http\Controllers\Admin\SliderController::class, 'edit'])->name('slider.edit');
-    Route::post('/slider/update', [\App\Http\Controllers\Admin\SliderController::class, 'update'])->name('slider.update');
-    Route::post('/slider/delete', [\App\Http\Controllers\Admin\SliderController::class, 'delete'])->name('slider.delete');
 
+Route::get('control/login', [\App\Http\Controllers\Admin\LoginController::class, 'index'])->name('login.index');
+Route::post('control/login', [\App\Http\Controllers\Admin\LoginController::class, 'authenticate'])->name('login.post');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/control', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard.index');
+    Route::prefix('control')->group(function () {
+        Route::get('/category', [\App\Http\Controllers\Admin\CategoryController::class, 'index'])->name('category.index');
+        Route::get('/category/create', [\App\Http\Controllers\Admin\CategoryController::class, 'create'])->name('category.create');
+        Route::post('/category/store', [\App\Http\Controllers\Admin\CategoryController::class, 'store'])->name('category.store');
+        Route::get('/category/edit/{id}', [\App\Http\Controllers\Admin\CategoryController::class, 'edit'])->name('category.edit');
+        Route::post('/category/update', [\App\Http\Controllers\Admin\CategoryController::class, 'update'])->name('category.update');
+        Route::post('/category/delete', [\App\Http\Controllers\Admin\CategoryController::class, 'delete'])->name('category.delete');
+        Route::get('/product', [\App\Http\Controllers\Admin\ProductController::class, 'index'])->name('product.index');
+        Route::get('/product/create', [\App\Http\Controllers\Admin\ProductController::class, 'create'])->name('product.create');
+        Route::post('/product/store', [\App\Http\Controllers\Admin\ProductController::class, 'store'])->name('product.store');
+        Route::get('/product/edit/{id}', [\App\Http\Controllers\Admin\ProductController::class, 'edit'])->name('product.edit');
+        Route::post('/product/update', [\App\Http\Controllers\Admin\ProductController::class, 'update'])->name('product.update');
+        Route::post('/product/delete', [\App\Http\Controllers\Admin\ProductController::class, 'delete'])->name('product.delete');
+        Route::get('/slider', [\App\Http\Controllers\Admin\SliderController::class, 'index'])->name('slider.index');
+        Route::get('/slider/create', [\App\Http\Controllers\Admin\SliderController::class, 'create'])->name('slider.create');
+        Route::post('/slider/store', [\App\Http\Controllers\Admin\SliderController::class, 'store'])->name('slider.store');
+        Route::get('/slider/edit/{id}', [\App\Http\Controllers\Admin\SliderController::class, 'edit'])->name('slider.edit');
+        Route::post('/slider/update', [\App\Http\Controllers\Admin\SliderController::class, 'update'])->name('slider.update');
+        Route::post('/slider/delete', [\App\Http\Controllers\Admin\SliderController::class, 'delete'])->name('slider.delete');Route::get('/logout', [\App\Http\Controllers\Admin\LogoutController::class, 'logout'])->name('logout');
+    });
 });
 
 

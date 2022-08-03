@@ -7,7 +7,7 @@
         <div class="user-profile">
             <div class="user-pro-body">
                 <div class="dropdown">
-                    <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Steave Gection <span class="caret"></span></a>
+                    <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User<span class="caret"></span></a>
                     <div class="dropdown-menu animated flipInY">
                         <!-- text-->
                         <a href="javascript:void(0)" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
@@ -52,8 +52,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="pages-login.html" aria-expanded="false">
-                        <i class="far fa-circle text-success"></i>
+                    <a class="waves-effect waves-dark" href="{{ route('logout') }}" aria-expanded="false">                        <i class="far fa-circle text-success"></i>
                         <span class="hide-menu">Log Out</span>
                     </a>
                 </li>
