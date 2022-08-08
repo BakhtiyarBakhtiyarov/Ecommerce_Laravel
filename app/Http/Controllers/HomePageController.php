@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -44,7 +45,8 @@ class HomePageController extends Controller
        ->first();
 
        $sliders = Slider::where('is_deleted',0)->get();
+       $contact = Contact::where('is_deleted',0)->first();
 
-       return view('homepage',compact('title','categories','new_products','best_sellers','on_sales','sliders','chance'));
+       return view('homepage',compact('title','categories','new_products','best_sellers','on_sales','sliders','chance','contact'));
    }
 }

@@ -1,6 +1,8 @@
 <!-- Topbar header - style you can find in pages.scss -->
 <!-- ============================================================== -->
 <header class="topbar">
+    <script src="https://kit.fontawesome.com/ba178d86a0.js" crossorigin="anonymous"></script>
+
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <!-- ============================================================== -->
         <!-- Logo -->
