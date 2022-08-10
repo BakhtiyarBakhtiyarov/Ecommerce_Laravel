@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -106,7 +107,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/slider/store', [\App\Http\Controllers\Admin\SliderController::class, 'store'])->name('slider.store');
         Route::get('/slider/edit/{id}', [\App\Http\Controllers\Admin\SliderController::class, 'edit'])->name('slider.edit');
         Route::post('/slider/update', [\App\Http\Controllers\Admin\SliderController::class, 'update'])->name('slider.update');
-        Route::post('/slider/delete', [\App\Http\Controllers\Admin\SliderController::class, 'delete'])->name('slider.delete');Route::get('/logout', [\App\Http\Controllers\Admin\LogoutController::class, 'logout'])->name('logout');
+        Route::post('/slider/delete', [\App\Http\Controllers\Admin\SliderController::class, 'delete'])->name('slider.delete');
+        Route::get('/contact', [\App\Http\Controllers\Admin\ContactController::class, 'index'])->name('contact.index');
+        Route::post('/contact/update', [\App\Http\Controllers\Admin\ContactController::class, 'update'])->name('contact.update');
+        Route::get('/logout', [\App\Http\Controllers\Admin\LogoutController::class, 'logout'])->name('logout');
     });
 });
 

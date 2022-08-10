@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Contact;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,6 +17,7 @@ class CategoryController extends Controller
 //        dd($id);
         $products = Product::with('detail')->where('category_id', $id)->where('is_deleted', 0)->get();
 //        dd($products);
-        return view('category',compact('title','products','category'));
+        $contact = Contact::where('is_deleted',0)->first();
+        return view('category',compact('title','products','category','contact'));
     }
 }
